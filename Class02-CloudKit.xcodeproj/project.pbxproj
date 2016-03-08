@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6226AC8B1C8F210700346CFD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */; };
 		624320311C8F1AF30040B48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624320301C8F1AF30040B48C /* AppDelegate.swift */; };
 		624320331C8F1AF30040B48C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624320321C8F1AF30040B48C /* ViewController.swift */; };
 		624320361C8F1AF30040B48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320341C8F1AF30040B48C /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		6243202D1C8F1AF20040B48C /* Class02-CloudKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Class02-CloudKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		624320301C8F1AF30040B48C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		624320321C8F1AF30040B48C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6226AC8B1C8F210700346CFD /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 		624320241C8F1AF20040B48C = {
 			isa = PBXGroup;
 			children = (
+				6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */,
 				6243202F1C8F1AF20040B48C /* Class02-CloudKit */,
 				6243202E1C8F1AF20040B48C /* Products */,
 			);
@@ -74,6 +78,7 @@
 				624320291C8F1AF20040B48C /* Sources */,
 				6243202A1C8F1AF20040B48C /* Frameworks */,
 				6243202B1C8F1AF20040B48C /* Resources */,
+				6226AC8C1C8F212300346CFD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -129,6 +134,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6226AC8C1C8F212300346CFD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		624320291C8F1AF20040B48C /* Sources */ = {
@@ -249,6 +271,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Class02-CloudKit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.henriquevalcanaia.Class02-CloudKit";
@@ -260,6 +286,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Class02-CloudKit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.henriquevalcanaia.Class02-CloudKit";
@@ -286,6 +316,7 @@
 				624320411C8F1AF30040B48C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

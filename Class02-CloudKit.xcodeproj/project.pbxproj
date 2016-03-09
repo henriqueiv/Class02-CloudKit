@@ -8,22 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		6226AC8B1C8F210700346CFD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */; };
+		623012DB1C8F3300002E3E14 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623012DA1C8F3300002E3E14 /* AsyncImageView.m */; };
+		623012DE1C8F366F002E3E14 /* PokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012DD1C8F366F002E3E14 /* PokemonCell.swift */; };
+		623012E41C8F38CA002E3E14 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012E01C8F38CA002E3E14 /* Pokemon.swift */; };
+		623012E51C8F38CA002E3E14 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012E11C8F38CA002E3E14 /* Skill.swift */; };
+		623012E61C8F38CA002E3E14 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012E21C8F38CA002E3E14 /* Status.swift */; };
+		623012E91C8F3B4B002E3E14 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012E81C8F3B4B002E3E14 /* DataManager.swift */; };
+		623012EC1C8F3E98002E3E14 /* pokemons.json in Resources */ = {isa = PBXBuildFile; fileRef = 623012EB1C8F3E98002E3E14 /* pokemons.json */; };
+		623012EF1C8F4602002E3E14 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623012EE1C8F4602002E3E14 /* CloudKit.framework */; };
 		624320311C8F1AF30040B48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624320301C8F1AF30040B48C /* AppDelegate.swift */; };
-		624320331C8F1AF30040B48C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624320321C8F1AF30040B48C /* ViewController.swift */; };
+		624320331C8F1AF30040B48C /* PokemonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624320321C8F1AF30040B48C /* PokemonsViewController.swift */; };
 		624320361C8F1AF30040B48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320341C8F1AF30040B48C /* Main.storyboard */; };
 		624320381C8F1AF30040B48C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624320371C8F1AF30040B48C /* Assets.xcassets */; };
 		6243203B1C8F1AF30040B48C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320391C8F1AF30040B48C /* LaunchScreen.storyboard */; };
+		62F95FDE1C8F5B9100528A3E /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F95FDD1C8F5B9100528A3E /* BaseModel.swift */; };
+		62F95FE01C8F9FEA00528A3E /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		623012D81C8F32FF002E3E14 /* Class02-CloudKit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Class02-CloudKit-Bridging-Header.h"; sourceTree = "<group>"; };
+		623012D91C8F3300002E3E14 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		623012DA1C8F3300002E3E14 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		623012DD1C8F366F002E3E14 /* PokemonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonCell.swift; sourceTree = "<group>"; };
+		623012E01C8F38CA002E3E14 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		623012E11C8F38CA002E3E14 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
+		623012E21C8F38CA002E3E14 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		623012E81C8F3B4B002E3E14 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		623012EB1C8F3E98002E3E14 /* pokemons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemons.json; sourceTree = "<group>"; };
+		623012ED1C8F45F9002E3E14 /* Class02-CloudKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Class02-CloudKit.entitlements"; sourceTree = "<group>"; };
+		623012EE1C8F4602002E3E14 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6243202D1C8F1AF20040B48C /* Class02-CloudKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Class02-CloudKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		624320301C8F1AF30040B48C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		624320321C8F1AF30040B48C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		624320321C8F1AF30040B48C /* PokemonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsViewController.swift; sourceTree = "<group>"; };
 		624320351C8F1AF30040B48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		624320371C8F1AF30040B48C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6243203A1C8F1AF30040B48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6243203C1C8F1AF30040B48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62F95FDD1C8F5B9100528A3E /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,16 +55,65 @@
 			buildActionMask = 2147483647;
 			files = (
 				6226AC8B1C8F210700346CFD /* SwiftyJSON.framework in Frameworks */,
+				623012EF1C8F4602002E3E14 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		623012D61C8F32EA002E3E14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				623012EE1C8F4602002E3E14 /* CloudKit.framework */,
+				6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		623012D71C8F32F4002E3E14 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				623012D91C8F3300002E3E14 /* AsyncImageView.h */,
+				623012DA1C8F3300002E3E14 /* AsyncImageView.m */,
+				623012D81C8F32FF002E3E14 /* Class02-CloudKit-Bridging-Header.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		623012DC1C8F3610002E3E14 /* PokemonCell */ = {
+			isa = PBXGroup;
+			children = (
+				623012DD1C8F366F002E3E14 /* PokemonCell.swift */,
+			);
+			name = PokemonCell;
+			sourceTree = "<group>";
+		};
+		623012DF1C8F38CA002E3E14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				623012E01C8F38CA002E3E14 /* Pokemon.swift */,
+				623012E11C8F38CA002E3E14 /* Skill.swift */,
+				623012E21C8F38CA002E3E14 /* Status.swift */,
+				62F95FDD1C8F5B9100528A3E /* BaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		623012EA1C8F3E22002E3E14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				624320371C8F1AF30040B48C /* Assets.xcassets */,
+				6243203C1C8F1AF30040B48C /* Info.plist */,
+				623012EB1C8F3E98002E3E14 /* pokemons.json */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		624320241C8F1AF20040B48C = {
 			isa = PBXGroup;
 			children = (
-				6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */,
+				623012D61C8F32EA002E3E14 /* Frameworks */,
 				6243202F1C8F1AF20040B48C /* Class02-CloudKit */,
 				6243202E1C8F1AF20040B48C /* Products */,
 			);
@@ -59,11 +131,16 @@
 			isa = PBXGroup;
 			children = (
 				624320301C8F1AF30040B48C /* AppDelegate.swift */,
-				624320321C8F1AF30040B48C /* ViewController.swift */,
-				624320341C8F1AF30040B48C /* Main.storyboard */,
-				624320371C8F1AF30040B48C /* Assets.xcassets */,
+				623012ED1C8F45F9002E3E14 /* Class02-CloudKit.entitlements */,
+				623012E81C8F3B4B002E3E14 /* DataManager.swift */,
 				624320391C8F1AF30040B48C /* LaunchScreen.storyboard */,
-				6243203C1C8F1AF30040B48C /* Info.plist */,
+				624320341C8F1AF30040B48C /* Main.storyboard */,
+				623012DF1C8F38CA002E3E14 /* Model */,
+				623012DC1C8F3610002E3E14 /* PokemonCell */,
+				624320321C8F1AF30040B48C /* PokemonsViewController.swift */,
+				623012EA1C8F3E22002E3E14 /* Supporting Files */,
+				623012D71C8F32F4002E3E14 /* Utils */,
+				62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */,
 			);
 			path = "Class02-CloudKit";
 			sourceTree = "<group>";
@@ -101,6 +178,12 @@
 				TargetAttributes = {
 					6243202C1C8F1AF20040B48C = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8WCPHDZJPJ;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -128,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6243203B1C8F1AF30040B48C /* LaunchScreen.storyboard in Resources */,
+				623012EC1C8F3E98002E3E14 /* pokemons.json in Resources */,
 				624320381C8F1AF30040B48C /* Assets.xcassets in Resources */,
 				624320361C8F1AF30040B48C /* Main.storyboard in Resources */,
 			);
@@ -157,7 +241,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				624320331C8F1AF30040B48C /* ViewController.swift in Sources */,
+				623012E41C8F38CA002E3E14 /* Pokemon.swift in Sources */,
+				62F95FE01C8F9FEA00528A3E /* CustomSlider.swift in Sources */,
+				623012E91C8F3B4B002E3E14 /* DataManager.swift in Sources */,
+				624320331C8F1AF30040B48C /* PokemonsViewController.swift in Sources */,
+				623012E61C8F38CA002E3E14 /* Status.swift in Sources */,
+				62F95FDE1C8F5B9100528A3E /* BaseModel.swift in Sources */,
+				623012DE1C8F366F002E3E14 /* PokemonCell.swift in Sources */,
+				623012E51C8F38CA002E3E14 /* Skill.swift in Sources */,
+				623012DB1C8F3300002E3E14 /* AsyncImageView.m in Sources */,
 				624320311C8F1AF30040B48C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +363,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Class02-CloudKit/Class02-CloudKit.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -279,6 +375,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.henriquevalcanaia.Class02-CloudKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Class02-CloudKit/Class02-CloudKit-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -286,6 +385,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Class02-CloudKit/Class02-CloudKit.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -294,6 +397,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.henriquevalcanaia.Class02-CloudKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Class02-CloudKit/Class02-CloudKit-Bridging-Header.h";
 			};
 			name = Release;
 		};

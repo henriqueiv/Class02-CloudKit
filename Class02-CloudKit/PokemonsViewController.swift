@@ -12,7 +12,7 @@ class PokemonsViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var pokemons = [Pokemon]()
+    private var pokemons = [Pokemon]()
     
     private var refreshControl = UIRefreshControl()
     
@@ -31,19 +31,21 @@ class PokemonsViewController: UIViewController {
     
     @objc private func loadData() {
         let dataManager = DataManager.sharedInstance
-        //        dataManager.loadRemoteDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) -> Void in
-        //
-        //        }
         
         dataManager.loadRemoteDataWithBlock { [unowned self] (pokemons:[Pokemon]?, error: ErrorType?) -> Void in
             if error == nil {
-                self.pokemons = pokemons!
-                self.collectionView.reloadData()
-                if self.refreshControl.refreshing {
-                    self.refreshControl.endRefreshing()
+                self.pokemons = pokemons!.sort { (p1, p2) -> Bool in
+                    return p1.name.compare(p2.name) == NSComparisonResult.OrderedAscending
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.collectionView.reloadData()
+                    if self.refreshControl.refreshing {
+                        self.refreshControl.endRefreshing()
+                    }
                 }
             } else {
-                
+                print(error!)
             }
         }
         //

@@ -59,7 +59,7 @@ class DataManager {
     
     func loadRemoteDataWithBlock(block:HVDataResultBlock) {
         let query = Pokemon.query()
-        CKContainer.defaultContainer().privateCloudDatabase.performQuery(query, inZoneWithID: nil) { (pokemonRecords:[CKRecord]?, error:NSError?) -> Void in
+        CKContainer.defaultContainer().publicCloudDatabase.performQuery(query, inZoneWithID: nil) { (pokemonRecords:[CKRecord]?, error:NSError?) -> Void in
             if error == nil {
                 if pokemonRecords?.count > 0 {
                     var pokemons = [Pokemon]()
@@ -67,6 +67,8 @@ class DataManager {
                         pokemons += [Pokemon(record: pokemonRecord)]
                     }
                     block(pokemons, nil)
+                } else {
+                    print("Nenhum Pokemon no euNuvem!")
                 }
             } else {
                 print(error)
@@ -77,6 +79,99 @@ class DataManager {
     // MARK: Save methods
     func saveLocalDataRemotely(pokemons:[Pokemon]) {
         
+    }
+    
+    func sendLocalToRemoteWithBlock(block:(NSError? -> Void)) {
+        self.loadLocalDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) in
+            if pokemons != nil {
+                var successCount = 0
+                var previousOperation:NSOperation!
+                let operationQueue = NSOperationQueue()
+                for pokemon in pokemons! {
+                    
+//                    let skillsOperations = self.createSkillsOperationWithPokemon(pokemon)
+                    let statusOperation = self.createStatusOperationWithPokemon(pokemon)
+//                    skillsOperations.last!.addDependency(statusOperation)
+                    
+                    let operation = NSBlockOperation()
+                    operation.addExecutionBlock({
+                        let pokemonRecord = pokemon.asCKRecord()
+                        CKContainer.defaultContainer().publicCloudDatabase.saveRecord(pokemonRecord, completionHandler: { (record:CKRecord?, error:NSError?) in
+                            if error == nil {
+//                                print("Foi: \(record)")
+                                
+                                successCount += 1
+                                if successCount == pokemons!.count {
+                                    block(nil)
+                                }
+                            } else {
+                                operationQueue.cancelAllOperations()
+                                block(error)
+                            }
+                        })
+                    })
+                    
+                    operation.addDependency(statusOperation)
+                    
+                    if operationQueue.operationCount > 0 {
+                        operation.addDependency(previousOperation)
+                    }
+                    previousOperation = operation
+                    operationQueue.addOperation(operation)
+                }
+            }
+        }
+    }
+    
+    private func createSkillsOperationWithPokemon(pokemon:Pokemon) -> [NSBlockOperation] {
+        var skillsOperations = [NSBlockOperation]()
+        var successCount = 0
+        var previousOperation:NSBlockOperation!
+        for skill in pokemon.skills {
+            
+            let operation = NSBlockOperation()
+            operation.addExecutionBlock{
+                let skillRecord = skill.asCKRecord()
+                CKContainer.defaultContainer().publicCloudDatabase.saveRecord(skillRecord, completionHandler: { (record:CKRecord?, error:NSError?) in
+                    if error == nil {
+//                        print("foi")
+                        
+                        successCount += 1
+                        if successCount == pokemon.skills.count {
+                            print("terminou")
+                        }
+                    } else {
+                        print(error)
+                    }
+                })
+                
+                if skillsOperations.count > 0 {
+                    operation.addDependency(previousOperation)
+                }
+                previousOperation = operation
+            }
+            
+            skillsOperations += [operation]
+        }
+        
+        return skillsOperations
+    }
+    
+    private func createStatusOperationWithPokemon(pokemon:Pokemon) -> NSBlockOperation {
+        let operation = NSBlockOperation()
+        operation.addExecutionBlock {
+            let statusRecord = pokemon.status.asCKRecord()
+            CKContainer.defaultContainer().publicCloudDatabase.saveRecord(statusRecord, completionHandler: { (record:CKRecord?, error:NSError?) in
+                if error == nil {
+                    print("foi")
+                } else {
+                    print(error)
+                }
+            })
+            
+        }
+        
+        return operation
     }
     
 }

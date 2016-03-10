@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DPY-4n-3cC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10115" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DPY-4n-3cC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10084"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -22,17 +22,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uUQ-Es-CUg">
-                                    <size key="itemSize" width="150" height="224"/>
+                                    <size key="itemSize" width="150" height="248"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonCell" id="EOF-qT-Fnc" customClass="PokemonCell" customModule="Class02_CloudKit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="150" height="224"/>
+                                        <rect key="frame" x="0.0" y="64" width="150" height="248"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="224"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="248"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NVj-xQ-ZhP" customClass="AsyncImageView">
@@ -48,38 +48,21 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pEB-pk-EU3" userLabel="Health">
-                                                    <rect key="frame" x="8" y="176" width="134" height="2"/>
-                                                </progressView>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jWg-ly-mAP" userLabel="Attack">
-                                                    <rect key="frame" x="8" y="189" width="134" height="2"/>
-                                                </progressView>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cZ9-0F-Eyi" userLabel="Defense">
-                                                    <rect key="frame" x="8" y="202" width="134" height="2"/>
-                                                </progressView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaI-YD-NHo">
+                                                    <rect key="frame" x="8" y="172" width="134" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="NVj-xQ-ZhP" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="5Lr-4N-Jdc"/>
-                                            <constraint firstItem="jWg-ly-mAP" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="9kf-Be-tKm"/>
-                                            <constraint firstItem="pEB-pk-EU3" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="AX4-AG-Eww"/>
                                             <constraint firstAttribute="trailing" secondItem="Rbf-iF-jBJ" secondAttribute="trailing" constant="8" id="Jt0-zN-v9A"/>
                                             <constraint firstItem="NVj-xQ-ZhP" firstAttribute="top" secondItem="EOF-qT-Fnc" secondAttribute="top" constant="8" id="Oj5-qP-kno"/>
-                                            <constraint firstAttribute="trailing" secondItem="cZ9-0F-Eyi" secondAttribute="trailing" constant="8" id="QF0-7F-HEH"/>
-                                            <constraint firstItem="pEB-pk-EU3" firstAttribute="top" secondItem="Rbf-iF-jBJ" secondAttribute="bottom" constant="11" id="T6e-s7-WTJ"/>
-                                            <constraint firstItem="jWg-ly-mAP" firstAttribute="top" secondItem="pEB-pk-EU3" secondAttribute="bottom" constant="11" id="TXe-vJ-aiY"/>
-                                            <constraint firstAttribute="trailing" secondItem="pEB-pk-EU3" secondAttribute="trailing" constant="8" id="gSJ-hs-nW9"/>
                                             <constraint firstItem="Rbf-iF-jBJ" firstAttribute="top" secondItem="NVj-xQ-ZhP" secondAttribute="bottom" constant="8" id="jgw-dz-fPQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="jWg-ly-mAP" secondAttribute="trailing" constant="8" id="nRc-JO-bcf"/>
                                             <constraint firstItem="Rbf-iF-jBJ" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="tkb-fK-A37"/>
-                                            <constraint firstItem="cZ9-0F-Eyi" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="uCS-g5-dtt"/>
-                                            <constraint firstItem="cZ9-0F-Eyi" firstAttribute="top" secondItem="jWg-ly-mAP" secondAttribute="bottom" constant="11" id="wiR-u7-XXo"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="attack" destination="jWg-ly-mAP" id="Per-Dj-AHa"/>
-                                            <outlet property="defense" destination="cZ9-0F-Eyi" id="P4X-2q-85t"/>
-                                            <outlet property="health" destination="pEB-pk-EU3" id="EQl-Pp-Yvh"/>
                                             <outlet property="pokemonImage" destination="NVj-xQ-ZhP" id="RDk-dQ-eCd"/>
                                             <outlet property="pokemonLabel" destination="Rbf-iF-jBJ" id="Dsl-89-9jC"/>
                                         </connections>
@@ -253,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdP-LC-T7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2830" y="810"/>
+            <point key="canvasLocation" x="2753" y="810"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iAm-sf-F0c">
@@ -293,7 +276,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lvE-cK-hl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047" y="810"/>
+            <point key="canvasLocation" x="2058" y="810"/>
         </scene>
     </scenes>
 </document>

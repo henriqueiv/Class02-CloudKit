@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10084"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Pokedex-->
@@ -22,17 +23,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uUQ-Es-CUg">
-                                    <size key="itemSize" width="150" height="248"/>
+                                    <size key="itemSize" width="150" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonCell" id="EOF-qT-Fnc" customClass="PokemonCell" customModule="Class02_CloudKit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="150" height="248"/>
+                                        <rect key="frame" x="0.0" y="64" width="150" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="248"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NVj-xQ-ZhP" customClass="AsyncImageView">
@@ -43,28 +44,35 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbf-iF-jBJ">
-                                                    <rect key="frame" x="8" y="147" width="134" height="18"/>
+                                                    <rect key="frame" x="8" y="147" width="134" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaI-YD-NHo">
-                                                    <rect key="frame" x="8" y="172" width="134" height="30"/>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="taJ-Jx-nci">
+                                                    <rect key="frame" x="65" y="172" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="bPW-uv-dCy"/>
+                                                        <constraint firstAttribute="width" constant="20" id="uTj-C4-2SB"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="NVj-xQ-ZhP" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="5Lr-4N-Jdc"/>
+                                            <constraint firstAttribute="bottom" secondItem="taJ-Jx-nci" secondAttribute="bottom" constant="8" id="65Q-PJ-ukX"/>
                                             <constraint firstAttribute="trailing" secondItem="Rbf-iF-jBJ" secondAttribute="trailing" constant="8" id="Jt0-zN-v9A"/>
                                             <constraint firstItem="NVj-xQ-ZhP" firstAttribute="top" secondItem="EOF-qT-Fnc" secondAttribute="top" constant="8" id="Oj5-qP-kno"/>
+                                            <constraint firstItem="taJ-Jx-nci" firstAttribute="top" secondItem="Rbf-iF-jBJ" secondAttribute="bottom" constant="8" id="jPZ-xR-SZX"/>
                                             <constraint firstItem="Rbf-iF-jBJ" firstAttribute="top" secondItem="NVj-xQ-ZhP" secondAttribute="bottom" constant="8" id="jgw-dz-fPQ"/>
                                             <constraint firstItem="Rbf-iF-jBJ" firstAttribute="leading" secondItem="EOF-qT-Fnc" secondAttribute="leading" constant="8" id="tkb-fK-A37"/>
+                                            <constraint firstItem="taJ-Jx-nci" firstAttribute="centerX" secondItem="EOF-qT-Fnc" secondAttribute="centerX" id="u0J-rL-Q5c"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="pokemonImage" destination="NVj-xQ-ZhP" id="RDk-dQ-eCd"/>
                                             <outlet property="pokemonLabel" destination="Rbf-iF-jBJ" id="Dsl-89-9jC"/>
+                                            <outlet property="star" destination="taJ-Jx-nci" id="s6i-1K-EUn"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -79,12 +87,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pokedex" id="g8d-28-X8o">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="i8t-z2-Fqk">
+                        <barButtonItem key="leftBarButtonItem" title="Upload data" id="nfZ-PN-MTu">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="x7g-4b-v6K" kind="presentation" id="ZPk-Cf-Ts6"/>
+                                <action selector="uploadData:" destination="BYZ-38-t0r" id="XGD-MV-6YM"/>
                             </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="i8t-z2-Fqk">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="x7g-4b-v6K" kind="presentation" id="ZPk-Cf-Ts6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Delete data" id="B9T-V3-l80">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="deleteData:" destination="BYZ-38-t0r" id="7s7-CH-dYG"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="nV7-ju-f6S" id="dll-Ji-zgH"/>
@@ -279,4 +301,7 @@
             <point key="canvasLocation" x="2058" y="810"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="star" width="25" height="25"/>
+    </resources>
 </document>

@@ -18,18 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-        let key = "migratedPokemon"
-        let migrated = NSUserDefaults.standardUserDefaults().boolForKey(key)
-        if !migrated {
-            DataManager.sharedInstance.sendLocalToRemoteWithBlock { (error:NSError?) in
-                if error == nil {
-                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: key)
-                } else {
-                    print(error)
-                }
-            }
-        }
-        
         return true
     }
     

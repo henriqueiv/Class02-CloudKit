@@ -8,41 +8,58 @@
 
 import CloudKit
 
-//protocol HVRecord {
-//    var className:String { get }
-//}
-//
-//typealias HVCompletionBlock = ((CKRecord?, NSError?) -> Void)
-//
-//extension HVRecord {
-//    
-//    func saveRecordWithBlock(block:HVCompletionBlock) {
-//        let record = CKRecord(recordType: className)
-//        let mirror = Mirror(reflecting: self)
-//        var properties = [String]()
-//        for child in mirror.children{
-//            guard let property = child.label else{
-//                assertionFailure("Error erroso")
-//                break;
-//            }
-//            
-//            if property == "super" { continue }
-//            
-////            if property.conformsTo(CKRecordValue){
-////                record[property] = self.property
-////            }
-//        }
-//        
-//        CKContainer.defaultContainer().publicCloudDatabase.saveRecord(record, completionHandler: block)
-//    }
-//    
-//}
+protocol BaseModelProtocol {
+    func asCKRecord() -> CKRecord
+}
+
+typealias HVCKRecordsArrayBlock = ([CKRecord]?, NSError?) -> Void
+typealias HVCKRecordBlock       = (CKRecord?, NSError?) -> Void
+typealias HVCKRecordZoneBlock   = (CKRecordZoneID?, NSError?) -> Void
 
 class BaseModel {
     
+    var recordID:CKRecordID!
+    
+    class func getRecordWithReference(reference:CKReference, withCompletionBlock block:HVCKRecordsArrayBlock) {
+        let predicate = NSPredicate(format: "recordID == %@", reference)
+        self.performQueryWithPredicate(predicate, withCompletionBlock: block)
+    }
+    
+    class func getRecordsWithReferences(references:[CKReference], withCompletionBlock block:HVCKRecordsArrayBlock) {
+        let predicate = NSPredicate(format: "recordID in %@", references)
+        self.performQueryWithPredicate(predicate, withCompletionBlock: block)
+    }
+    
+    class func performQueryWithPredicate(predicate:NSPredicate, withCompletionBlock block:HVCKRecordsArrayBlock) {
+        let query = self.query(predicate)
+        Database.Public.performQuery(query, inZoneWithID: nil, completionHandler: block)
+    }
+    
     class func query(predicate:NSPredicate = NSPredicate(value: true)) -> CKQuery {
-        let query = CKQuery(recordType: String(self), predicate: predicate)
+        let recordType = String(self)
+        let query = CKQuery(recordType: recordType, predicate: predicate)
         return query
+    }
+    
+    class func deleteAllWithCompletionblock(block:HVCKRecordZoneBlock) {
+        Database.Public.deleteRecordZoneWithID(CKRecordZone.defaultRecordZone().zoneID, completionHandler: block)
+    }
+    
+    func saveWithCompletionBlock(block:HVCKRecordBlock) {
+        let record = asCKRecord()
+        Database.Public.saveRecord(record, completionHandler: block)
+    }
+    
+    func asCKRecord() -> CKRecord {
+        let recordType = String(self.dynamicType)
+        return CKRecord(recordType: recordType, recordID: recordID)
+    }
+    
+    func update() {
+        let pokemonRecord = self.asCKRecord()
+        let modifyOperation = CKModifyRecordsOperation(recordsToSave: [pokemonRecord], recordIDsToDelete: nil)
+        modifyOperation.savePolicy = .ChangedKeys
+        Database.Public.addOperation(modifyOperation)
     }
     
 }

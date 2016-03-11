@@ -18,15 +18,16 @@ public enum DataManagerError: ErrorType {
     }
 }
 
+struct Database {
+    static let Public = CKContainer.defaultContainer().publicCloudDatabase
+    static let Private = CKContainer.defaultContainer().privateCloudDatabase
+}
+
 typealias HVDataResultBlock = (([Pokemon]?, ErrorType?) -> Void)
 
 class DataManager {
     
     static let sharedInstance = DataManager()
-    
-    var higherHealth = 0
-    var higherAttack = 0
-    var higherDefense = 0
     
     // MARK: Load methods
     func loadLocalDataWithBlock(block:HVDataResultBlock) {
@@ -42,24 +43,17 @@ class DataManager {
             for jsonObject in jsonObjectArray {
                 let pokemon = Pokemon(json: JSON(jsonObject))
                 pokemons += [pokemon]
-                checkHigherStatsWithPokemon(pokemon)
             }
             
             block(pokemons, nil)
         } catch let error {
+            print(error)
             block(nil, DataManagerError.LoadLocalData.FileNotFound)
         }
     }
     
-    private func checkHigherStatsWithPokemon(pokemon:Pokemon) {
-        higherHealth = max(higherHealth, pokemon.status.health)
-        higherAttack = max(higherAttack, pokemon.status.attack)
-        higherDefense = max(higherDefense, pokemon.status.defense)
-    }
-    
     func loadRemoteDataWithBlock(block:HVDataResultBlock) {
-        let query = Pokemon.query()
-        CKContainer.defaultContainer().publicCloudDatabase.performQuery(query, inZoneWithID: nil) { (pokemonRecords:[CKRecord]?, error:NSError?) -> Void in
+        Pokemon.performQueryWithPredicate(NSPredicate(value: true)) { (pokemonRecords:[CKRecord]?, error:NSError?) in
             if error == nil {
                 if pokemonRecords?.count > 0 {
                     var pokemons = [Pokemon]()
@@ -77,101 +71,65 @@ class DataManager {
     }
     
     // MARK: Save methods
-    func saveLocalDataRemotely(pokemons:[Pokemon]) {
-        
-    }
-    
     func sendLocalToRemoteWithBlock(block:(NSError? -> Void)) {
         self.loadLocalDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) in
             if pokemons != nil {
+                //                let queue = NSOperationQueue()
+                //                let insertOperation = NSBlockOperation()
+                //                insertOperation.addExecutionBlock{
+                //                    var pokemonsRecords = [CKRecord]()
+                //                    for pokemon in pokemons! {
+                //                        pokemonsRecords += [pokemon.asCKRecord()]
+                //                    }
+                //                    let recordsOperation = CKModifyRecordsOperation(recordsToSave: pokemonsRecords, recordIDsToDelete: nil)
+                //                    recordsOperation.savePolicy = .AllKeys
+                //                    recordsOperation.perRecordProgressBlock = { record, progress in
+                //                        print(progress)
+                //                    }
+                //                    recordsOperation.perRecordCompletionBlock = { record, error in
+                //                        if error == nil {
+                //                            print("salvou")
+                //                        } else {
+                //                            queue.cancelAllOperations()
+                //                            block(error)
+                //                        }
+                //                    }
+                //                    recordsOperation.completionBlock = {
+                //                        block(nil)
+                //                    }
+                //                }
+                //                queue.addOperation(insertOperation)
+                //
+                //            }
+                
                 var successCount = 0
-                var previousOperation:NSOperation!
-                let operationQueue = NSOperationQueue()
+                let retrieveQueue = NSOperationQueue()
+                var operations = [NSBlockOperation]()
                 for pokemon in pokemons! {
-                    
-//                    let skillsOperations = self.createSkillsOperationWithPokemon(pokemon)
-                    let statusOperation = self.createStatusOperationWithPokemon(pokemon)
-//                    skillsOperations.last!.addDependency(statusOperation)
-                    
                     let operation = NSBlockOperation()
-                    operation.addExecutionBlock({
-                        let pokemonRecord = pokemon.asCKRecord()
-                        CKContainer.defaultContainer().publicCloudDatabase.saveRecord(pokemonRecord, completionHandler: { (record:CKRecord?, error:NSError?) in
+                    operation.addExecutionBlock {
+                        pokemon.saveWithCompletionBlock({ (record:CKRecord?, error:NSError?) in
                             if error == nil {
-//                                print("Foi: \(record)")
-                                
                                 successCount += 1
-                                if successCount == pokemons!.count {
+                                if successCount == pokemons!.count{
                                     block(nil)
                                 }
                             } else {
-                                operationQueue.cancelAllOperations()
+                                retrieveQueue.cancelAllOperations()
                                 block(error)
                             }
+                            
                         })
-                    })
-                    
-                    operation.addDependency(statusOperation)
-                    
-                    if operationQueue.operationCount > 0 {
-                        operation.addDependency(previousOperation)
                     }
-                    previousOperation = operation
-                    operationQueue.addOperation(operation)
+                    
+                    if operations.count > 0 {
+                        operations.last!.addDependency(operation)
+                    }
+                    operations += [operation]
                 }
+                retrieveQueue.addOperations(operations, waitUntilFinished: true)
             }
         }
     }
-    
-    private func createSkillsOperationWithPokemon(pokemon:Pokemon) -> [NSBlockOperation] {
-        var skillsOperations = [NSBlockOperation]()
-        var successCount = 0
-        var previousOperation:NSBlockOperation!
-        for skill in pokemon.skills {
-            
-            let operation = NSBlockOperation()
-            operation.addExecutionBlock{
-                let skillRecord = skill.asCKRecord()
-                CKContainer.defaultContainer().publicCloudDatabase.saveRecord(skillRecord, completionHandler: { (record:CKRecord?, error:NSError?) in
-                    if error == nil {
-//                        print("foi")
-                        
-                        successCount += 1
-                        if successCount == pokemon.skills.count {
-                            print("terminou")
-                        }
-                    } else {
-                        print(error)
-                    }
-                })
-                
-                if skillsOperations.count > 0 {
-                    operation.addDependency(previousOperation)
-                }
-                previousOperation = operation
-            }
-            
-            skillsOperations += [operation]
-        }
-        
-        return skillsOperations
-    }
-    
-    private func createStatusOperationWithPokemon(pokemon:Pokemon) -> NSBlockOperation {
-        let operation = NSBlockOperation()
-        operation.addExecutionBlock {
-            let statusRecord = pokemon.status.asCKRecord()
-            CKContainer.defaultContainer().publicCloudDatabase.saveRecord(statusRecord, completionHandler: { (record:CKRecord?, error:NSError?) in
-                if error == nil {
-                    print("foi")
-                } else {
-                    print(error)
-                }
-            })
-            
-        }
-        
-        return operation
-    }
-    
 }
+

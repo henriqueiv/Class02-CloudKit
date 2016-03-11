@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6226AC8B1C8F210700346CFD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */; };
 		623012DB1C8F3300002E3E14 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623012DA1C8F3300002E3E14 /* AsyncImageView.m */; };
 		623012DE1C8F366F002E3E14 /* PokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012DD1C8F366F002E3E14 /* PokemonCell.swift */; };
 		623012E41C8F38CA002E3E14 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623012E01C8F38CA002E3E14 /* Pokemon.swift */; };
@@ -21,7 +20,14 @@
 		624320361C8F1AF30040B48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320341C8F1AF30040B48C /* Main.storyboard */; };
 		624320381C8F1AF30040B48C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624320371C8F1AF30040B48C /* Assets.xcassets */; };
 		6243203B1C8F1AF30040B48C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320391C8F1AF30040B48C /* LaunchScreen.storyboard */; };
+		6277BDA01C932018004D11A8 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BD9F1C932018004D11A8 /* SwiftyJSON.framework */; };
+		6277BDA21C934076004D11A8 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BDA11C934076004D11A8 /* SVProgressHUD.framework */; };
+		6277BDA61C934146004D11A8 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BDA41C934146004D11A8 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6277BDA71C934146004D11A8 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BDA51C934146004D11A8 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62C3796A1C92F14A00290A38 /* Class02_CloudKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C379691C92F14A00290A38 /* Class02_CloudKitTests.swift */; };
+		62C379731C93022D00290A38 /* AddPokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C379721C93022D00290A38 /* AddPokemonViewController.swift */; };
+		62C379751C93024200290A38 /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C379741C93024200290A38 /* AddSkillViewController.swift */; };
+		62C379771C93024C00290A38 /* AddStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C379761C93024C00290A38 /* AddStatusViewController.swift */; };
 		62F95FDE1C8F5B9100528A3E /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F95FDD1C8F5B9100528A3E /* BaseModel.swift */; };
 		62F95FE01C8F9FEA00528A3E /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */; };
 /* End PBXBuildFile section */
@@ -36,8 +42,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6277BDA31C934116004D11A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6277BDA61C934146004D11A8 /* SVProgressHUD.framework in Embed Frameworks */,
+				6277BDA71C934146004D11A8 /* SwiftyJSON.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		623012D81C8F32FF002E3E14 /* Class02-CloudKit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Class02-CloudKit-Bridging-Header.h"; sourceTree = "<group>"; };
 		623012D91C8F3300002E3E14 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		623012DA1C8F3300002E3E14 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
@@ -56,9 +76,16 @@
 		624320371C8F1AF30040B48C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6243203A1C8F1AF30040B48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6243203C1C8F1AF30040B48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6277BD9F1C932018004D11A8 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		6277BDA11C934076004D11A8 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		6277BDA41C934146004D11A8 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		6277BDA51C934146004D11A8 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		62C379671C92F14A00290A38 /* Class02-CloudKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Class02-CloudKitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C379691C92F14A00290A38 /* Class02_CloudKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Class02_CloudKitTests.swift; sourceTree = "<group>"; };
 		62C3796B1C92F14A00290A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62C379721C93022D00290A38 /* AddPokemonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPokemonViewController.swift; sourceTree = "<group>"; };
+		62C379741C93024200290A38 /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
+		62C379761C93024C00290A38 /* AddStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStatusViewController.swift; sourceTree = "<group>"; };
 		62F95FDD1C8F5B9100528A3E /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,8 +95,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6226AC8B1C8F210700346CFD /* SwiftyJSON.framework in Frameworks */,
+				6277BDA21C934076004D11A8 /* SVProgressHUD.framework in Frameworks */,
 				623012EF1C8F4602002E3E14 /* CloudKit.framework in Frameworks */,
+				6277BDA01C932018004D11A8 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,8 +114,9 @@
 		623012D61C8F32EA002E3E14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6277BDA11C934076004D11A8 /* SVProgressHUD.framework */,
+				6277BD9F1C932018004D11A8 /* SwiftyJSON.framework */,
 				623012EE1C8F4602002E3E14 /* CloudKit.framework */,
-				6226AC8A1C8F210700346CFD /* SwiftyJSON.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,9 +163,11 @@
 		624320241C8F1AF20040B48C = {
 			isa = PBXGroup;
 			children = (
+				6277BDA41C934146004D11A8 /* SVProgressHUD.framework */,
+				6277BDA51C934146004D11A8 /* SwiftyJSON.framework */,
+				6243202F1C8F1AF20040B48C /* Class02-CloudKit */,
 				62C379681C92F14A00290A38 /* Class02-CloudKitTests */,
 				623012D61C8F32EA002E3E14 /* Frameworks */,
-				6243202F1C8F1AF20040B48C /* Class02-CloudKit */,
 				6243202E1C8F1AF20040B48C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,6 +184,7 @@
 		6243202F1C8F1AF20040B48C /* Class02-CloudKit */ = {
 			isa = PBXGroup;
 			children = (
+				62C379711C93020D00290A38 /* AddPokemon */,
 				624320301C8F1AF30040B48C /* AppDelegate.swift */,
 				623012ED1C8F45F9002E3E14 /* Class02-CloudKit.entitlements */,
 				623012E81C8F3B4B002E3E14 /* DataManager.swift */,
@@ -177,6 +209,16 @@
 			path = "Class02-CloudKitTests";
 			sourceTree = "<group>";
 		};
+		62C379711C93020D00290A38 /* AddPokemon */ = {
+			isa = PBXGroup;
+			children = (
+				62C379721C93022D00290A38 /* AddPokemonViewController.swift */,
+				62C379741C93024200290A38 /* AddSkillViewController.swift */,
+				62C379761C93024C00290A38 /* AddStatusViewController.swift */,
+			);
+			name = AddPokemon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -188,6 +230,7 @@
 				6243202A1C8F1AF20040B48C /* Frameworks */,
 				6243202B1C8F1AF20040B48C /* Resources */,
 				6226AC8C1C8F212300346CFD /* ShellScript */,
+				6277BDA31C934116004D11A8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,6 +348,9 @@
 			files = (
 				623012E41C8F38CA002E3E14 /* Pokemon.swift in Sources */,
 				62F95FE01C8F9FEA00528A3E /* CustomSlider.swift in Sources */,
+				62C379771C93024C00290A38 /* AddStatusViewController.swift in Sources */,
+				62C379751C93024200290A38 /* AddSkillViewController.swift in Sources */,
+				62C379731C93022D00290A38 /* AddPokemonViewController.swift in Sources */,
 				623012E91C8F3B4B002E3E14 /* DataManager.swift in Sources */,
 				624320331C8F1AF30040B48C /* PokemonsViewController.swift in Sources */,
 				623012E61C8F38CA002E3E14 /* Status.swift in Sources */,
@@ -536,6 +582,7 @@
 				62C379701C92F14A00290A38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,6 +9,7 @@
 import CloudKit
 import Foundation
 import SwiftyJSON
+import SVProgressHUD
 
 public enum DataManagerError: ErrorType {
     enum LoadLocalData: ErrorType {
@@ -16,6 +17,8 @@ public enum DataManagerError: ErrorType {
         case FileNotFound
         case ParseFileError
     }
+    
+    case NoPokemons
 }
 
 struct Database {
@@ -62,74 +65,54 @@ class DataManager {
                     }
                     block(pokemons, nil)
                 } else {
-                    print("Nenhum Pokemon no euNuvem!")
+                    block(nil, DataManagerError.NoPokemons)
                 }
             } else {
-                print(error)
+                block(nil, error)
             }
         }
     }
     
     // MARK: Save methods
-    func sendLocalToRemoteWithBlock(block:(NSError? -> Void)) {
+    func sendLocalToRemoteWithCompletionBlock(completionBlock: ((NSError?) -> Void)) {
         self.loadLocalDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) in
             if pokemons != nil {
-                //                let queue = NSOperationQueue()
-                //                let insertOperation = NSBlockOperation()
-                //                insertOperation.addExecutionBlock{
-                //                    var pokemonsRecords = [CKRecord]()
-                //                    for pokemon in pokemons! {
-                //                        pokemonsRecords += [pokemon.asCKRecord()]
-                //                    }
-                //                    let recordsOperation = CKModifyRecordsOperation(recordsToSave: pokemonsRecords, recordIDsToDelete: nil)
-                //                    recordsOperation.savePolicy = .AllKeys
-                //                    recordsOperation.perRecordProgressBlock = { record, progress in
-                //                        print(progress)
-                //                    }
-                //                    recordsOperation.perRecordCompletionBlock = { record, error in
-                //                        if error == nil {
-                //                            print("salvou")
-                //                        } else {
-                //                            queue.cancelAllOperations()
-                //                            block(error)
-                //                        }
-                //                    }
-                //                    recordsOperation.completionBlock = {
-                //                        block(nil)
-                //                    }
-                //                }
-                //                queue.addOperation(insertOperation)
-                //
-                //            }
+                let records = pokemons!.flatMap({ self.generateRecordsWithPokemon($0) })
+                let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+                operation.perRecordProgressBlock = { (record:CKRecord, progress:Double) in
+//                    SVProgressHUD.showProgress(Float(100/Double(operation.recordsToSave!.count)*progress), status: "Uploading...")
+                    print(progress)
+                }
                 
                 var successCount = 0
-                let retrieveQueue = NSOperationQueue()
-                var operations = [NSBlockOperation]()
-                for pokemon in pokemons! {
-                    let operation = NSBlockOperation()
-                    operation.addExecutionBlock {
-                        pokemon.saveWithCompletionBlock({ (record:CKRecord?, error:NSError?) in
-                            if error == nil {
-                                successCount += 1
-                                if successCount == pokemons!.count{
-                                    block(nil)
-                                }
-                            } else {
-                                retrieveQueue.cancelAllOperations()
-                                block(error)
-                            }
-                            
-                        })
+                operation.perRecordCompletionBlock = { (record: CKRecord?, error: NSError?) in
+                    if error == nil {
+                        successCount += 1
+                        if records.count == successCount {
+                            completionBlock(nil)
+                        }
+                    } else {
+                        completionBlock(error)
                     }
-                    
-                    if operations.count > 0 {
-                        operations.last!.addDependency(operation)
-                    }
-                    operations += [operation]
                 }
-                retrieveQueue.addOperations(operations, waitUntilFinished: true)
+                Database.Public.addOperation(operation)
             }
         }
+    }
+    
+    private func generateRecordsWithPokemon(pokemon:Pokemon) -> [CKRecord] {
+        var records = [CKRecord]()
+        
+        records += [pokemon.asCKRecord()]
+        if pokemon.status != nil {
+            records += [pokemon.status!.asCKRecord()]
+        }
+        
+        if pokemon.skills?.count > 0 {
+            records += pokemon.skills!.map { $0.asCKRecord() }
+        }
+        
+        return records
     }
 }
 

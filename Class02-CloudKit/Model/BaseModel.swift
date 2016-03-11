@@ -8,17 +8,13 @@
 
 import CloudKit
 
-protocol BaseModelProtocol {
-    func asCKRecord() -> CKRecord
-}
-
 typealias HVCKRecordsArrayBlock = ([CKRecord]?, NSError?) -> Void
 typealias HVCKRecordBlock       = (CKRecord?, NSError?) -> Void
 typealias HVCKRecordZoneBlock   = (CKRecordZoneID?, NSError?) -> Void
 
 class BaseModel {
     
-    var recordID:CKRecordID!
+    var recordID:CKRecordID?
     
     class func getRecordWithReference(reference:CKReference, withCompletionBlock block:HVCKRecordsArrayBlock) {
         let predicate = NSPredicate(format: "recordID == %@", reference)
@@ -52,13 +48,24 @@ class BaseModel {
     
     func asCKRecord() -> CKRecord {
         let recordType = String(self.dynamicType)
-        return CKRecord(recordType: recordType, recordID: recordID)
+        if recordID == nil {
+            return CKRecord(recordType: recordType)
+        } else {
+            return CKRecord(recordType: recordType, recordID: recordID!)
+        }
     }
     
-    func update() {
-        let pokemonRecord = self.asCKRecord()
-        let modifyOperation = CKModifyRecordsOperation(recordsToSave: [pokemonRecord], recordIDsToDelete: nil)
+    func deleteWithCompletionBlock(completionBlock:((CKRecordID?, NSError?) -> Void)) {
+        let record = self.asCKRecord()
+        Database.Public.deleteRecordWithID(record.recordID, completionHandler: completionBlock)
+    }
+    
+    func update(progressBlock:((CKRecord, Double)->Void)? = nil, completionBlock:((CKRecord?, NSError?) -> Void)? = nil) {
+        let record = self.asCKRecord()
+        let modifyOperation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         modifyOperation.savePolicy = .ChangedKeys
+        modifyOperation.perRecordProgressBlock = progressBlock
+        modifyOperation.perRecordCompletionBlock = completionBlock
         Database.Public.addOperation(modifyOperation)
     }
     

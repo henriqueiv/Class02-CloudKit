@@ -7,6 +7,7 @@
 //
 
 import CloudKit
+import SVProgressHUD
 import UIKit
 
 class PokemonsViewController: UIViewController {
@@ -26,10 +27,9 @@ class PokemonsViewController: UIViewController {
         refreshControl.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         collectionView.addSubview(refreshControl)
-        
+        collectionView.alwaysBounceVertical = true
         
         CKContainer.defaultContainer().accountStatusWithCompletionHandler { (status:CKAccountStatus, error:NSError?) in
-            print(status.rawValue)
             if status == .NoAccount {
                 let alert = UIAlertController(title: "Sign in to iCloud", message: "Sign in to your iCloud account to write records. On the Home screen, launch Settings, tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID.", preferredStyle: .Alert)
                 
@@ -43,26 +43,16 @@ class PokemonsViewController: UIViewController {
     }
     
     @IBAction func uploadData(sender: AnyObject) {
-        DataManager.sharedInstance.sendLocalToRemoteWithBlock { (error:NSError?) in
+        DataManager.sharedInstance.sendLocalToRemoteWithCompletionBlock { (error:NSError?) in
             if error == nil {
-                print("Upload finished")
-                DataManager.sharedInstance.loadRemoteDataWithBlock({ (pokemons:[Pokemon]?, error:ErrorType?) in
-                    if error == nil{
-                        self.pokemons = pokemons!
-                        dispatch_async(dispatch_get_main_queue()){
-                            self.collectionView.reloadData()
-                        }
-                    } else {
-                        print(error)
-                    }
-                })
-                
+                //                SVProgressHUD.showWithStatus("Completed")
+                print("completed")
             } else {
-                print(error)
+                //                SVProgressHUD.showErrorWithStatus("Error")
+                print("error")
             }
         }
     }
-    
     
     @IBAction func deleteData(sender: AnyObject) {
         Pokemon.deleteAllWithCompletionblock { (recordZoneID:CKRecordZoneID?, error:NSError?) in
@@ -77,22 +67,26 @@ class PokemonsViewController: UIViewController {
     @objc private func loadData() {
         let dataManager = DataManager.sharedInstance
         dataManager.loadRemoteDataWithBlock { [unowned self] (pokemons:[Pokemon]?, error: ErrorType?) -> Void in
+            self.pokemons.removeAll()
             if error == nil {
-                self.pokemons.removeAll()
                 self.pokemons = pokemons!.sort { (p1, p2) -> Bool in
                     return p1.name.compare(p2.name) == NSComparisonResult.OrderedAscending
-                }
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.collectionView.reloadData()
-                    if self.refreshControl.refreshing {
-                        self.refreshControl.endRefreshing()
-                    }
                 }
             } else {
                 print(error)
             }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.collectionView.reloadData()
+                if self.refreshControl.refreshing {
+                    self.refreshControl.endRefreshing()
+                }
+            }
         }
+    }
+    
+    @IBAction func backToPokemonsViewController(segue:UIStoryboardSegue) {
+        
     }
     
 }
@@ -109,6 +103,31 @@ extension PokemonsViewController: PokemonCellDelegate {
         }
     }
     
+    func deletePokemonInCell(cell: PokemonCell) {
+        let alert = UIAlertController(title: "Delete pokemon", message: "Are u sure?", preferredStyle: .Alert)
+        
+        let yes = UIAlertAction(title: "Yes", style: .Destructive) { (action) in
+            if let indexPath = self.collectionView.indexPathForCell(cell) {
+                let pokemon = self.pokemons[indexPath.row]
+                pokemon.deleteWithCompletionBlock({ (recordID:CKRecordID?, error:NSError?) in
+                    print("deleted")
+                    self.pokemons.removeAtIndex(indexPath.row)
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.collectionView.reloadData()
+                    }
+                })
+            }
+        }
+        alert.addAction(yes)
+        
+        let no = UIAlertAction(title: "No", style: .Cancel) { (action) in
+            print("cancel")
+        }
+        alert.addAction(no)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -118,6 +137,13 @@ extension PokemonsViewController: UICollectionViewDelegate {
         return 1
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
 }
 
 // MARK: - UICollectionViewDataSource

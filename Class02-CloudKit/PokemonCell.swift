@@ -10,6 +10,7 @@ import UIKit
 
 protocol PokemonCellDelegate: class {
     func favoritePokemonInCell(cell:PokemonCell)
+    func deletePokemonInCell(cell:PokemonCell)
 }
 
 class PokemonCell: UICollectionViewCell {
@@ -23,9 +24,14 @@ class PokemonCell: UICollectionViewCell {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "favoriteTouched")
         gestureRecognizer.numberOfTapsRequired = 1
         star.addGestureRecognizer(gestureRecognizer)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: "deletePokemon:")
+        longPress.minimumPressDuration = 1.0
+        self.addGestureRecognizer(longPress)
     }
     
     func configureCellWithPokemon(pokemon:Pokemon) {
+        pokemonImage.image = nil
         pokemonImage.imageURL = NSURL(string: pokemon.image)
         pokemonLabel.text = pokemon.name
         
@@ -35,6 +41,12 @@ class PokemonCell: UICollectionViewCell {
     
     @objc func favoriteTouched() {
         delegate?.favoritePokemonInCell(self)
+    }
+    
+    @objc func deletePokemon(longPress:UILongPressGestureRecognizer) {
+        if longPress.state == .Began {
+            delegate?.deletePokemonInCell(self)
+        }
     }
     
 }

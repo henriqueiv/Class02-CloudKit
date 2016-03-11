@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Class02_CloudKit
 
 class Class02_CloudKitTests: XCTestCase {
     
@@ -20,9 +21,18 @@ class Class02_CloudKitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLocalDataLoad() {
+        let expectation = expectationWithDescription("Ready")
+        DataManager.sharedInstance.loadLocalDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) in
+            expectation.fulfill()
+            if error == nil {
+                XCTAssertTrue(pokemons!.count == 6)
+            } else {
+                XCTAssertNotNil(error)
+            }
+        }
+        
+        waitForExpectationsWithTimeout(5.0, handler: nil)
     }
     
 }

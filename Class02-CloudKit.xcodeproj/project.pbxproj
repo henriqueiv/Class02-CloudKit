@@ -20,6 +20,8 @@
 		624320361C8F1AF30040B48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320341C8F1AF30040B48C /* Main.storyboard */; };
 		624320381C8F1AF30040B48C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624320371C8F1AF30040B48C /* Assets.xcassets */; };
 		6243203B1C8F1AF30040B48C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624320391C8F1AF30040B48C /* LaunchScreen.storyboard */; };
+		625A5CFC1C9704AE001CB511 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625A5CFB1C9704AE001CB511 /* ModelsTests.swift */; };
+		625A5CFE1C9708F9001CB511 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625A5CFD1C9708F9001CB511 /* DataManagerTests.swift */; };
 		6277BDA01C932018004D11A8 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BD9F1C932018004D11A8 /* SwiftyJSON.framework */; };
 		6277BDA21C934076004D11A8 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BDA11C934076004D11A8 /* SVProgressHUD.framework */; };
 		6277BDA61C934146004D11A8 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6277BDA41C934146004D11A8 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -29,7 +31,6 @@
 		62C379751C93024200290A38 /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C379741C93024200290A38 /* AddSkillViewController.swift */; };
 		62C379771C93024C00290A38 /* AddStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C379761C93024C00290A38 /* AddStatusViewController.swift */; };
 		62F95FDE1C8F5B9100528A3E /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F95FDD1C8F5B9100528A3E /* BaseModel.swift */; };
-		62F95FE01C8F9FEA00528A3E /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		624320371C8F1AF30040B48C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6243203A1C8F1AF30040B48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6243203C1C8F1AF30040B48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		625A5CFB1C9704AE001CB511 /* ModelsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
+		625A5CFD1C9708F9001CB511 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		6277BD9F1C932018004D11A8 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		6277BDA11C934076004D11A8 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		6277BDA41C934146004D11A8 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
@@ -87,7 +90,6 @@
 		62C379741C93024200290A38 /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
 		62C379761C93024C00290A38 /* AddStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStatusViewController.swift; sourceTree = "<group>"; };
 		62F95FDD1C8F5B9100528A3E /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
-		62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +197,6 @@
 				624320321C8F1AF30040B48C /* PokemonsViewController.swift */,
 				623012EA1C8F3E22002E3E14 /* Supporting Files */,
 				623012D71C8F32F4002E3E14 /* Utils */,
-				62F95FDF1C8F9FEA00528A3E /* CustomSlider.swift */,
 			);
 			path = "Class02-CloudKit";
 			sourceTree = "<group>";
@@ -205,6 +206,8 @@
 			children = (
 				62C379691C92F14A00290A38 /* Class02_CloudKitTests.swift */,
 				62C3796B1C92F14A00290A38 /* Info.plist */,
+				625A5CFB1C9704AE001CB511 /* ModelsTests.swift */,
+				625A5CFD1C9708F9001CB511 /* DataManagerTests.swift */,
 			);
 			path = "Class02-CloudKitTests";
 			sourceTree = "<group>";
@@ -347,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				623012E41C8F38CA002E3E14 /* Pokemon.swift in Sources */,
-				62F95FE01C8F9FEA00528A3E /* CustomSlider.swift in Sources */,
 				62C379771C93024C00290A38 /* AddStatusViewController.swift in Sources */,
 				62C379751C93024200290A38 /* AddSkillViewController.swift in Sources */,
 				62C379731C93022D00290A38 /* AddPokemonViewController.swift in Sources */,
@@ -367,6 +369,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				62C3796A1C92F14A00290A38 /* Class02_CloudKitTests.swift in Sources */,
+				625A5CFE1C9708F9001CB511 /* DataManagerTests.swift in Sources */,
+				625A5CFC1C9704AE001CB511 /* ModelsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

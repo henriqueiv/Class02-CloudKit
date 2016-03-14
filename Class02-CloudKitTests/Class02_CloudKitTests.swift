@@ -21,7 +21,7 @@ class Class02_CloudKitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testLocalDataLoad() {
+    func testPokemonCount() {
         let expectation = expectationWithDescription("Ready")
         DataManager.sharedInstance.loadLocalDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) in
             expectation.fulfill()
@@ -34,5 +34,15 @@ class Class02_CloudKitTests: XCTestCase {
         
         waitForExpectationsWithTimeout(5.0, handler: nil)
     }
+    
+    //    func testPokemonCell() {
+    //        let cell = PokemonCell()
+    //        let pokemon = Pokemon(number: 1, name: "", icon: "", image: "", level: 1, type1: "", type2: nil, status: nil, skills: nil, isFavorite: true)
+    //        cell.configureCellWithPokemon(pokemon)
+    //
+    //        let validURL = (cell.pokemonImage.imageURL == NSURL(string: pokemon.image))
+    //
+    //        XCTAssertTrue(validURL && cell.pokemonLabel.text == pokemon.name)
+    //    }
     
 }

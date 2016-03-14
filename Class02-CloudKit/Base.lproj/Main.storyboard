@@ -76,12 +76,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LNf-KS-kIS">
+                                <rect key="frame" x="0.0" y="64" width="600" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nV7-ju-f6S" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="0TZ-0g-Pha"/>
                             <constraint firstItem="nV7-ju-f6S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3G9-K6-6GU"/>
+                            <constraint firstItem="LNf-KS-kIS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DYb-du-G3O"/>
                             <constraint firstAttribute="trailing" secondItem="nV7-ju-f6S" secondAttribute="trailing" id="fLe-mg-4Sw"/>
+                            <constraint firstAttribute="trailing" secondItem="LNf-KS-kIS" secondAttribute="trailing" id="h5A-Bc-y8L"/>
+                            <constraint firstItem="LNf-KS-kIS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pzx-n2-BZ3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nV7-ju-f6S" secondAttribute="bottom" id="ySh-Qj-ObF"/>
                         </constraints>
                     </view>
@@ -101,6 +107,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="nV7-ju-f6S" id="dll-Ji-zgH"/>
+                        <outlet property="progressView" destination="LNf-KS-kIS" id="kXE-C6-oMj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -140,13 +147,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GsB-2Y-7kV">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="oF1-oT-a8a">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="oF1-oT-a8a">
                                         <rect key="frame" x="8" y="72" width="584" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="mZ3-Gq-6kK"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="uBF-jT-GFf">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="uBF-jT-GFf">
                                         <rect key="frame" x="284" y="230" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="RVr-Zi-KSV"/>

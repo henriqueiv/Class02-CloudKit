@@ -6,6 +6,7 @@
 //  Copyright © 2016 Henrique Valcanaia. All rights reserved.
 //
 
+import CloudKit
 import UIKit
 
 class AddPokemonViewController: UIViewController {
@@ -24,6 +25,7 @@ class AddPokemonViewController: UIViewController {
     private var isFavorite = false
     private let GoToStatusSegue = "gotoAddStatus"
     private var keyboardHeight:CGFloat!
+    private var destinationImageView:UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,14 @@ class AddPokemonViewController: UIViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "favoriteTouched")
         gestureRecognizer.numberOfTapsRequired = 1
         favoriteImageView.addGestureRecognizer(gestureRecognizer)
+        
+        let tapPokemonImageRecognizer = UITapGestureRecognizer(target: self, action: "didTouchPokemonImageView")
+        tapPokemonImageRecognizer.numberOfTapsRequired = 1
+        pokemonImageView.addGestureRecognizer(tapPokemonImageRecognizer)
+        
+        let tapIconImageRecognizer = UITapGestureRecognizer(target: self, action: "didTouchIconImageView")
+        tapIconImageRecognizer.numberOfTapsRequired = 1
+        iconImageView.addGestureRecognizer(tapIconImageRecognizer)
         
         scrollView.keyboardDismissMode = .Interactive
         setupKeyboardControls()
@@ -90,13 +100,34 @@ class AddPokemonViewController: UIViewController {
         self.performSegueWithIdentifier(GoToStatusSegue, sender: nil)
     }
     
+    private func getDocumentsDirectory() -> NSString {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == GoToStatusSegue{
             let pokemon = Pokemon()
             pokemon.number = Int(numberTextField.text!)!
             pokemon.name = nameTextField.text!
-            //            pokemon.icon = nameTextField.text!
-            //            pokemon.image = nameTextField.text!
+            
+            if let image = pokemonImageView.image {
+                if let data = UIImagePNGRepresentation(image) {
+                    let filename = getDocumentsDirectory().stringByAppendingPathComponent(Pokemon.ImageName)
+                    data.writeToFile(filename, atomically: true)
+                    pokemon.icon = filename
+                }
+            }
+            
+            if let image = iconImageView.image {
+                if let data = UIImagePNGRepresentation(image) {
+                    let filename = getDocumentsDirectory().stringByAppendingPathComponent(Pokemon.IconName)
+                    data.writeToFile(filename, atomically: true)
+                    pokemon.icon = filename
+                }
+            }
+            
             pokemon.level = Int(levelTextField.text!)!
             pokemon.type1 = type1TextField.text!
             pokemon.type2 = type2TextField.text!
@@ -105,6 +136,36 @@ class AddPokemonViewController: UIViewController {
             let vc = segue.destinationViewController as! AddStatusViewController
             vc.pokemon = pokemon
         }
+    }
+    
+    @objc private func didTouchPokemonImageView() {
+        destinationImageView = pokemonImageView
+        didTouchImageView()
+    }
+    
+    @objc private func didTouchIconImageView() {
+        destinationImageView = iconImageView
+        didTouchImageView()
+    }
+    
+    private func didTouchImageView() {
+        let imgController = UIImagePickerController()
+        imgController.delegate = self
+        imgController.allowsEditing = true
+        imgController.sourceType = .PhotoLibrary
+        
+        presentViewController(imgController, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - UIImagePickerController
+extension AddPokemonViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
+        destinationImageView.image = image
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

@@ -74,17 +74,19 @@ class DataManager {
     }
     
     // MARK: Save methods
-    func sendLocalToRemoteWithCompletionBlock(completionBlock: ((NSError?) -> Void)) {
+    func sendLocalToRemote(progressBlock:((CKRecord?, Float) -> Void), completionBlock: ((NSError?) -> Void)) {
         self.loadLocalDataWithBlock { (pokemons:[Pokemon]?, error:ErrorType?) in
             if pokemons != nil {
+                var successCount = 0
                 let records = pokemons!.flatMap({ self.generateRecordsWithPokemon($0) })
                 let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
-                operation.perRecordProgressBlock = { (record:CKRecord, progress:Double) in
-//                    SVProgressHUD.showProgress(Float(100/Double(operation.recordsToSave!.count)*progress), status: "Uploading...")
-                    print(progress)
+                operation.perRecordProgressBlock = { (record, progress) in
+                    let total = Float(records.count)
+                    
+                    let fullProgress:Float = (Float(progress)/total)+(total/Float(successCount))
+                    progressBlock(record, fullProgress)
                 }
                 
-                var successCount = 0
                 operation.perRecordCompletionBlock = { (record: CKRecord?, error: NSError?) in
                     if error == nil {
                         successCount += 1

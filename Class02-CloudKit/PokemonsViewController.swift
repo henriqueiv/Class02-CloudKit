@@ -13,6 +13,7 @@ import UIKit
 class PokemonsViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var progressView: UIProgressView!
     
     private var pokemons = [Pokemon]()
     
@@ -43,13 +44,18 @@ class PokemonsViewController: UIViewController {
     }
     
     @IBAction func uploadData(sender: AnyObject) {
-        DataManager.sharedInstance.sendLocalToRemoteWithCompletionBlock { (error:NSError?) in
+        self.progressView.setProgress(0.0, animated: true)
+        DataManager.sharedInstance.sendLocalToRemote({ (record:CKRecord?, progress:Float) in
+            dispatch_async(dispatch_get_main_queue()){
+                print(progress)
+                self.progressView.setProgress(progress, animated: true)
+            }
+        }) { (error:NSError?) in
             if error == nil {
-                //                SVProgressHUD.showWithStatus("Completed")
-                print("completed")
+                print("foi")
+                self.progressView.setProgress(1.0, animated: true)
             } else {
-                //                SVProgressHUD.showErrorWithStatus("Error")
-                print("error")
+                print(error)
             }
         }
     }
